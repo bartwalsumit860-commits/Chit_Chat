@@ -1,0 +1,125 @@
+import { setUser } from '@/redux/authSlice';
+import { USER_API_ENDPOINT } from '@/utils/api';
+import axios from 'axios';
+import { Loader2 } from 'lucide-react';
+import React, { useState } from 'react'
+import { BiSolidCaretUpSquare } from 'react-icons/bi';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+const UpdateProfile = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const [loading,setLoading] = useState(false)
+  const user = useSelector(store=>store.auth.user);
+  const [input,setInput] = useState({
+    fullName:user?.fullName,
+    gender:user?.gender,
+    file:user?.profilePhoto
+  });
+
+  const changeEventHandler = (e)=>{
+    setInput({...input,[e.target.name]:e.target.value});
+  }
+
+  const changeFileHandler = (e)=>{
+    setInput({...input,file:e.target.files?.[0]})
+  }
+
+  const submitHandler = async (e)=>{
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("fullName", input.fullName)
+    formData.append("gender", input.gender)
+    if (input.file) {
+      formData.append("file", input.file)
+    }
+    
+    try {
+      setLoading(true)
+      const res = await axios.post(`${USER_API_ENDPOINT}/update`,formData,{
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        withCredentials: true
+      } );
+
+      if(res?.data?.success){
+        dispatch(setUser(res?.data?.updatedUser));
+        console.log( res?.data?.message)
+        navigate("/profile")
+        
+      } 
+    } catch (error) {
+      console.log(error?.response?.data?.message)
+      console.log(error)
+    }
+    finally{
+      setLoading(false)
+    }
+  }
+  return (
+    <div>
+      <h1 className='text-3xl font-bold text-blue-600 text-center text-shadow-lg mt-3'>Update Your Profile</h1>
+      <div className='p-6 border border-gray-400 shadow-lg rounded-2xl w-2xl mt-6 max-w-4xl  mx-auto h-[90h] flex items-center justify-center'>
+        <form onSubmit={submitHandler}>
+          
+          <div className="flex gap-3 mt-3">
+            <label className='text-lg text-gray-700 w-[30%] text-center'>Full Name</label>
+            <input type="text" name='fullName'
+                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 flex-1'
+                value={input?.fullName}
+                onChange={changeEventHandler} />
+          </div>
+
+              <div className="flex gap-3 mt-3">
+              <label className='text-lg text-gray-700 w-[30%] text-center'>Profile Photo</label>
+              <input type="file" name='file'
+                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 cursor-pointer'
+                accept='image/*'
+                onChange={changeFileHandler} />
+            </div>
+
+
+              <div className="flex gap-3 mt-3">
+              <label
+                htmlFor="gender"
+                className="text-lg text-gray-700 w-[30%] text-center"
+              >
+                Select Gender
+              </label>
+
+              <select
+                name="gender"
+                id="gender"
+                value={input?.gender}
+                onChange={changeEventHandler}
+                className="h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 flex-1"
+              >
+                <option value="" disabled>Choose Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+
+            {
+              loading ?
+                (
+                  <button type='submit' className='p-2 bg-orange-400 rounded-2xl text-white w-full mt-4' disabled>
+                    <Loader2 className="mx-auto h-6 w-6 animate-spin inline" />
+                    Please wait</button>
+
+                ) :
+                (
+                  <button type='submit' className='p-2 bg-orange-400 rounded-2xl text-white w-full mt-4'>Submit</button>
+                )
+            }
+        </form>
+      </div>
+    </div>
+  )
+}
+
+export default UpdateProfile
