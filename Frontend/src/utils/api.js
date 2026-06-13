@@ -7,4 +7,4 @@ export const MESSAGE_API_ENDPOINT =
 `${VITE_API_URL}/message`;
 
 export const VITE_SOCKET_URL =
-"https://chit-chat-lf5q.onrender.com/";
+"https://chit-chat-lf5q.onrender.com";
