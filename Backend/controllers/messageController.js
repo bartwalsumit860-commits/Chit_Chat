@@ -8,67 +8,58 @@ export const sendMessage = async (req, res) => {
         const receiverId = req.params.id;
         const { message } = req.body;
 
-        // Find or create conversation
         let conversation = await Conversation.findOne({
             participent: { $all: [senderId, receiverId] }
         });
 
         if (!conversation) {
             conversation = await Conversation.create({
-                participent: [senderId, receiverId],
+                participent: [senderId, receiverId]
             });
         }
 
-        // Create new message
         const newMessage = await Message.create({
             senderId,
             receiverId,
             message
         });
 
-        // Add message to conversation
-        if (newMessage) {
-            conversation.messages.push(newMessage._id);
-        }
-
+        conversation.messages.push(newMessage._id);
         await conversation.save();
 
-        // Populate sender info before sending via socket
-        const populatedMessage = await Message.findById(newMessage._id)
-            .populate('senderId', 'fullName profilePhoto');
+        const populatedMessage = await Message.findById(
+            newMessage._id
+        ).populate("senderId", "fullName profilePhoto");
 
-        // Send to receiver
-        const receiverSocketId = userSocketMap[receiverId];
+        const receiverSocketId =
+            userSocketMap[receiverId.toString()];
+
         if (receiverSocketId) {
-            io.to(receiverSocketId).emit("newMessage", populatedMessage);
-        }
-
-        // Also send to sender's other devices (optional)
-        const senderSocketId = userSocketMap[senderId];
-        if (senderSocketId && senderSocketId !== receiverSocketId) {
-            io.to(senderSocketId).emit("messageSent", populatedMessage);
+            io.to(receiverSocketId).emit(
+                "newMessage",
+                populatedMessage
+            );
         }
 
         return res.status(201).json({
-            message: "Message Sent successfully",
-            newMessage: populatedMessage,
-            success: true
+            success: true,
+            newMessage: populatedMessage
         });
 
     } catch (error) {
         console.log(error);
+
         return res.status(500).json({
-            message: "Something went wrong",
-            success: false
+            success: false,
+            message: "Something went wrong"
         });
     }
 };
-
 export const getMessages = async (req, res) => {
     try {
         const receiverId = req.params.id;
         const senderId = req.id;
-        
+
         const conversation = await Conversation.findOne({
             participent: { $all: [senderId, receiverId] }
         }).populate({
