@@ -23,25 +23,31 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser());
 
 const corsOption = {
-  origin:"http://localhost:5173",
+  origin:process.env.CLIENT_URL,
   credentials:true
 }
 app.use(cors(corsOption))
 
 //backend routes end points
-app.get("/",(req,res)=>{
-  console.log("Hello world the server is running")
-})
+app.get("/", (req, res) => {
+  res.send("Chit Chat Backend Running");
+});
 
 app.use("/api/v1/users",userRoute);
 app.use("/api/v1/message",messageRoute)
 
 const start = async () => {
-  await connectDb();
+  try {
+    await connectDb();
 
   server.listen(PORT,() => {
     console.log(`Server is running at ${PORT}`);
   });
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+  
 };
 
 start();
