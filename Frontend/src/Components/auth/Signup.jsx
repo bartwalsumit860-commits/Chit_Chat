@@ -65,54 +65,54 @@ const Signup = () => {
 
   return (
     <div className="">
-      <div className='max-w-6xl mx-auto border border-gray-200 shadow-lg mt-10 rounded-2xl p-10'>
-        <h1 className='text-3xl font-bold text-orange-500'>Wellcome to the chit_chat!</h1>
-        <h1 className='text-md text-gray-600 mt-2'>Sign Up here to create account to enjoy chating with friends !</h1>
+      <div className='max-w-6xl mx-auto border border-gray-200 shadow-lg mt-4 md:mt-10 rounded-2xl p-4 md:p-10'>
+        <h1 className='text-2xl md:text-3xl font-bold text-orange-500'>Wellcome to the chit_chat!</h1>
+        <h1 className='text-sm md:text-md text-gray-600 mt-2'>Sign Up here to create account to enjoy chating with friends !</h1>
 
         <div className="flex justify-center items-center">
-          <form onSubmit={submitHandler} className='p-6 border border-gray-400 shadow-lg rounded-2xl mt-10 w-2xl'>
-            <h1 className='text-3xl font-bold text-orange-500'>Sign Up!</h1>
+          <form onSubmit={submitHandler} className='p-4 md:p-6 border border-gray-400 shadow-lg rounded-2xl mt-6 md:mt-10 w-full max-w-md'>
+            <h1 className='text-2xl md:text-3xl font-bold text-orange-500'>Sign Up!</h1>
 
-            <div className="flex gap-3 mt-7">
-              <label className='text-lg text-gray-700 w-[30%] text-center'>Full Name</label>
+            <div className="flex flex-col md:flex-row gap-1 md:gap-3 mt-4 md:mt-7">
+              <label className='text-base md:text-lg text-gray-700 md:w-[30%] text-left md:text-center'>Full Name</label>
               <input type="text" name='fullName'
-                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 flex-1'
+                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 w-full'
                 placeholder='Antonio'
                 value={input.fullName}
                 onChange={changeEventHandler} />
             </div>
 
-            <div className="flex gap-3 mt-3">
-              <label className='text-lg text-gray-700 w-[30%] text-center'>User Name</label>
+            <div className="flex flex-col md:flex-row gap-1 md:gap-3 mt-3">
+              <label className='text-base md:text-lg text-gray-700 md:w-[30%] text-left md:text-center'>User Name</label>
               <input type="text" name='userName'
-                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 flex-1'
+                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 w-full'
                 placeholder='Sharlock Holmes'
                 value={input.userName}
                 onChange={changeEventHandler} />
             </div>
 
 
-            <div className="flex gap-3 mt-3">
-              <label className='text-lg text-gray-700 w-[30%] text-center'>Password</label>
+            <div className="flex flex-col md:flex-row gap-1 md:gap-3 mt-3">
+              <label className='text-base md:text-lg text-gray-700 md:w-[30%] text-left md:text-center'>Password</label>
               <input type="password" name='password'
-                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 flex-1'
+                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 w-full'
                 value={input.password}
                 onChange={changeEventHandler} />
             </div>
 
 
-            <div className="flex gap-3 mt-3">
-              <label className='text-lg text-gray-700 w-[30%] text-center'>Profile Photo</label>
+            <div className="flex flex-col md:flex-row gap-1 md:gap-3 mt-3">
+              <label className='text-base md:text-lg text-gray-700 md:w-[30%] text-left md:text-center'>Profile Photo</label>
               <input type="file" name='file'
-                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 cursor-pointer'
+                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 w-full cursor-pointer'
                 accept='image/*'
                 onChange={changeFileHandler} />
             </div>
 
-            <div className="flex gap-3 mt-3">
+            <div className="flex flex-col md:flex-row gap-1 md:gap-3 mt-3">
               <label
                 htmlFor="gender"
-                className="text-lg text-gray-700 w-[30%] text-center"
+                className="text-base md:text-lg text-gray-700 md:w-[30%] text-left md:text-center"
               >
                 Select Gender
               </label>
@@ -122,7 +122,7 @@ const Signup = () => {
                 id="gender"
                 value={input.gender}
                 onChange={changeEventHandler}
-                className="h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 flex-1"
+                className="h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 w-full"
               >
                 <option value="" disabled>Choose Gender</option>
                 <option value="male">Male</option>

@@ -62,31 +62,31 @@ const UpdateProfile = () => {
   }
   return (
     <div>
-      <h1 className='text-3xl font-bold text-blue-600 text-center text-shadow-lg mt-3'>Update Your Profile</h1>
-      <div className='p-6 border border-gray-400 shadow-lg rounded-2xl w-2xl mt-6 max-w-4xl  mx-auto h-[90h] flex items-center justify-center'>
+      <h1 className='text-2xl md:text-3xl font-bold text-blue-600 text-center text-shadow-lg mt-3'>Update Your Profile</h1>
+      <div className='p-4 md:p-6 border border-gray-400 shadow-lg rounded-2xl mt-6 w-full max-w-md mx-auto'>
         <form onSubmit={submitHandler}>
           
-          <div className="flex gap-3 mt-3">
-            <label className='text-lg text-gray-700 w-[30%] text-center'>Full Name</label>
+          <div className="flex flex-col md:flex-row gap-1 md:gap-3 mt-3">
+            <label className='text-base md:text-lg text-gray-700 md:w-[30%] text-left md:text-center'>Full Name</label>
             <input type="text" name='fullName'
-                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 flex-1'
+                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 w-full'
                 value={input?.fullName}
                 onChange={changeEventHandler} />
           </div>
 
-              <div className="flex gap-3 mt-3">
-              <label className='text-lg text-gray-700 w-[30%] text-center'>Profile Photo</label>
+              <div className="flex flex-col md:flex-row gap-1 md:gap-3 mt-3">
+              <label className='text-base md:text-lg text-gray-700 md:w-[30%] text-left md:text-center'>Profile Photo</label>
               <input type="file" name='file'
-                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 cursor-pointer'
+                className='h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 w-full cursor-pointer'
                 accept='image/*'
                 onChange={changeFileHandler} />
             </div>
 
 
-              <div className="flex gap-3 mt-3">
+              <div className="flex flex-col md:flex-row gap-1 md:gap-3 mt-3">
               <label
                 htmlFor="gender"
-                className="text-lg text-gray-700 w-[30%] text-center"
+                className="text-base md:text-lg text-gray-700 md:w-[30%] text-left md:text-center"
               >
                 Select Gender
               </label>
@@ -96,7 +96,7 @@ const UpdateProfile = () => {
                 id="gender"
                 value={input?.gender}
                 onChange={changeEventHandler}
-                className="h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 flex-1"
+                className="h-11 rounded-xl outline-none border border-gray-200 bg-slate-100 px-4 w-full"
               >
                 <option value="" disabled>Choose Gender</option>
                 <option value="male">Male</option>

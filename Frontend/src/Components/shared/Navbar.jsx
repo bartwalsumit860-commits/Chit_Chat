@@ -32,15 +32,15 @@ const Navbar = () => {
     return (
         <div className='flex items-center justify-between p-2 m-2 max-w-full border shadow-lg border-gray-200 rounded-md'>
             <div className="flex items-center gap-2">
-                <img src="https://i.scdn.co/image/ab6761610000e5ebcaa3bc230d90d20eaa11a22a" alt="logo" className='rounded-full w-15' />
+                <img src="https://i.scdn.co/image/ab6761610000e5ebcaa3bc230d90d20eaa11a22a" alt="logo" className='rounded-full w-10 md:w-15' />
 
-                <h1 className='text-lg text-gray-700 font-semibold'>Chat Bindas</h1>
+                <h1 className='text-base md:text-lg text-gray-700 font-semibold'>Chat Bindas</h1>
             </div>
 
             <div className="flex items-center gap-2">
                
 
-                <div className="flex gap-2">
+                <div className="flex gap-1 md:gap-2">
                     <div className="bg-gray-100 p-2 hover:bg-gray-200 w-fit rounded-full">
                         <IoMdNotificationsOutline size={"24px"} />
                     </div>

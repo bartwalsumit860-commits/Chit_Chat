@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useLayoutEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { IoIosSearch } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { GrGallery } from "react-icons/gr";
 import { IoMdSend } from "react-icons/io";
@@ -8,11 +9,13 @@ import Message from './Message';
 import axios from 'axios';
 import { MESSAGE_API_ENDPOINT } from '@/utils/api';
 import socket from '@/utils/socket';
+import { setConvo } from '@/redux/conversationSlice';
 
 const MessageBox = () => {
   const convo = useSelector(store => store.conversation.convo);
   const user = useSelector(store => store.auth.user);
   const onlineUsers = useSelector(store => store.auth.onlineUsers);
+  const dispatch = useDispatch();
 
   const receiverId = convo?._id;
   const [input, setInput] = useState("");
@@ -163,6 +166,9 @@ const MessageBox = () => {
       {/* Header */}
       <div className="bg-white px-5 py-4 flex justify-between items-center border-b border-gray-200">
         <div className="flex items-center gap-4">
+          <button onClick={() => dispatch(setConvo(null))} className="md:hidden p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-200">
+            <IoIosArrowBack size={22} />
+          </button>
           {convo?.profilePhoto ? (
             <img
               src={convo?.profilePhoto}

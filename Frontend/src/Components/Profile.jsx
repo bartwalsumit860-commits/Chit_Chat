@@ -10,11 +10,11 @@ const Profile = () => {
 
     return (
         <div>
-            <h1 className='text-3xl font-bold text-blue-600 text-center text-shadow-lg mt-3'>Profile Page</h1>
-            <div className='mt-6 max-w-fit border border-gray-300 mx-auto h-[90h] shadow-2xl rounded-2xl'>
+            <h1 className='text-2xl md:text-3xl font-bold text-blue-600 text-center text-shadow-lg mt-3'>Profile Page</h1>
+            <div className='mt-6 w-full max-w-sm mx-auto border border-gray-300 shadow-2xl rounded-2xl overflow-hidden'>
                 <div className="flex items-center justify-center relative">
 
-                    <div className='bg-blue-100 p-3 hover:bg-blue-200 w-fit rounded-full absolute' onClick={()=>navigate("/profile/update")}>
+                    <div className='bg-blue-100 p-3 hover:bg-blue-200 w-fit rounded-full absolute top-2 right-2 z-10' onClick={()=>navigate("/profile/update")}>
                         <Pen className=' text-blue-500' />
                     </div>
                     {
@@ -22,7 +22,7 @@ const Profile = () => {
                             <img
                                 src={user?.profilePhoto}
                                 alt="profilePhoto"
-                                className="w-100 h-70  object-cover cursor-pointer rounded-2xl"
+                                className="w-full h-60 md:h-70 object-cover cursor-pointer"
                             />
                         ) : (
                             <div className="w-10 h-10 text-lg rounded-full bg-green-500 text-white flex items-center justify-center font-semibold cursor-pointer">

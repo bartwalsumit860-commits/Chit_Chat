@@ -26,7 +26,7 @@ const MessageSidebar = () => {
     }
     const [category, setCategory] = useState(0);
     return (
-        <div className='m-2 rounded-t-xl border border-gray-200 shadow-lg w-[30%] p-2 h-[90vh] rounded-b-2xl'>
+        <div className='m-2 rounded-t-xl border border-gray-200 shadow-lg w-full p-2 h-[90vh] rounded-b-2xl'>
             <div className="flex items-center gap-4 p-2 max-w-full">
                 <h1 className='text-2xl text-gray-900 font-semibold'>Messages</h1>
 
@@ -49,7 +49,7 @@ const MessageSidebar = () => {
                             <button
                                 key={index}
                                 onClick={() => setCategory(index)}
-                                className={`px-4 py-2  transition text-center w-full ${category === index ? 'border-b-4 border-b-orange-400' : 'border-b-0 border-b-transparent'} hover:bg-gray-100 flex itmes-center gap-5 p-4 ' : 'text-gray-600 hover:bg-gray-100'}`}
+                                className={`px-4 py-2 transition text-center w-full ${category === index ? 'border-b-4 border-b-orange-400 text-gray-900' : 'border-b-0 border-b-transparent text-gray-600'} hover:bg-gray-100`}
                             >
                                 {item.text}
                             </button>

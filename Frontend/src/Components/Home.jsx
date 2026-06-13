@@ -11,6 +11,7 @@ import { setOnlineUsers } from '@/redux/authSlice';
 const Home = () => {
   const dispatch = useDispatch();
   let user = useSelector(store => store.auth.user);
+  const convo = useSelector(store => store.conversation.convo);
 
   //connection
   useEffect(() => {
@@ -43,8 +44,12 @@ const Home = () => {
           <>
             <Navbar />
             <div className="max-w-full flex mt-4">
-              <MessageSidebar className='w-[30%]' />
-              <MessageBox />
+              <div className={`${convo ? 'hidden md:block' : 'block'} w-full md:w-[40%] lg:w-[30%]`}>
+                <MessageSidebar />
+              </div>
+              <div className={`${convo ? 'block' : 'hidden md:block'} flex-1`}>
+                <MessageBox />
+              </div>
             </div>
           </>
         )
